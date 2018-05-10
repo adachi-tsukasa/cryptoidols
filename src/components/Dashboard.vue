@@ -21,7 +21,7 @@ export default {
       exists: false,
     }
   },
-  mounted: function () {
+  beforeCreate: function () {
     IdolFactory.init().then(() => {
       IdolFactory.idolExists(window.web3.eth.accounts[0]).then((exists) => {
         console.log(exists);
@@ -39,6 +39,7 @@ export default {
       e.preventDefault()
       IdolFactory.destroyIdol().then(() => {
         this.msg = 'Welcome to CryptoIdol.'
+        this.exists = false;
       }).catch(err => {
         console.log(err)
       })
